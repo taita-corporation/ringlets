@@ -1,46 +1,37 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StoreContext } from "../context/store-context"
-import Logo from "../icons/logo"
-import { Navigation } from "./navigation"
-import { CartButton } from "./cart-button"
-import SearchIcon from "../icons/search"
-import { Toast } from "./toast"
-import {
-  header,
-  container,
-  logo as logoCss,
-  searchButton,
-  nav,
-} from "./header.module.css"
+import * as React from 'react';
+import { Link } from 'gatsby';
+import { StoreContext } from '../../context/store-context';
+import Logo from '../../icons/logo';
+import CartButton from '../cart-button';
+import SearchIcon from '../../icons/search';
+import Toast from '../toast';
+import * as s from './header.module.css';
 
-export function Header() {
-  const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
+function Header() {
+  const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext);
 
-  const items = checkout ? checkout.lineItems : []
+  const items = checkout ? checkout.lineItems : [];
 
-  const quantity = items.reduce((total, item) => {
-    return total + item.quantity
-  }, 0)
+  const quantity = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <div className={container}>
-      <header className={header}>
-        <Link to="/" className={logoCss}>
+    <div className={s.container}>
+      <header className={s.header}>
+        <Link to="/" className={s.logo}>
           <Logo />
         </Link>
-        <Navigation className={nav} />
-        <Link to="/search" className={searchButton}>
+        <Link to="/search" className={s.searchButton}>
           <SearchIcon />
         </Link>
         <CartButton quantity={quantity} />
       </header>
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
-          "Updating…"
+          'Updating…'
         ) : (
           <>
-            Added to cart{" "}
+            Added to cart
+            {' '}
             <svg
               width="14"
               height="14"
@@ -64,5 +55,7 @@ export function Header() {
         )}
       </Toast>
     </div>
-  )
+  );
 }
+
+export default Header;

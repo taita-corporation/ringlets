@@ -60,7 +60,7 @@ module.exports = {
     // Add your Google Analytics ID to the .env file to enable
     // Otherwise, this plugin can be removed
     process.env.GOOGLE_ANALYTICS_ID && {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
         trackingId: process.env.GOOGLE_ANALYTICS_ID,
       },
@@ -68,4 +68,5 @@ module.exports = {
     'gatsby-plugin-less',
     'gatsby-plugin-postcss',
   ].filter(Boolean),
+
 };

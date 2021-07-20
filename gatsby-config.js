@@ -55,6 +55,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-robots-txt',
     'gatsby-plugin-gatsby-cloud',
     // Add your Google Analytics ID to the .env file to enable
     // Otherwise, this plugin can be removed

@@ -2,22 +2,22 @@
   "name": "gatsby-starter-shopify",
   "version": "1.0.0",
   "private": true,
-  "description": "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
-  "author": "LekoArts <hello@lekoarts.de>",
+  "description": "数年間誰の手にも渡らなかったお洋服。いつか捨てられてしまうかもしれないお洋服。きっと誰かに可愛がってもらえる日を心待ちにしている。そんなお洋服を集め、販売するアウトレットショップです。",
+  "author": "Koki Shibata",
   "license": "0BSD",
   "keywords": [
-    "gatsby",
-    "shopify",
-    "starter",
-    "ecommerce",
-    "e-commerce"
+    "タンスの肥やし",
+    "ファッション",
+    "通販",
+    "アウトレット",
+    "インフルエンサー"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "dv": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "cl": "gatsby clean"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^1.1.0",
@@ -29,6 +29,7 @@
     "gatsby-plugin-react-helmet": "^4.4.0",
     "gatsby-plugin-sharp": "^3.4.1",
     "gatsby-plugin-sitemap": "^4.0.0",
+    "gatsby-source-datocms": "^2.6.16",
     "gatsby-source-filesystem": "^3.4.0",
     "gatsby-source-shopify": "^5.0.1",
     "gatsby-transformer-sharp": "^3.4.0",
@@ -42,5 +43,21 @@
     "react-icons": "^4.1.0",
     "shopify-buy": "^2.11.0",
     "urql": "^2.0.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "gatsby-plugin-less": "^5.9.0",
+    "gatsby-plugin-postcss": "^4.9.0",
+    "postcss": "^8.3.5",
+    "prettier": "^2.3.2",
+    "tailwindcss": "^2.2.4"
   }
 }

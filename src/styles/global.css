@@ -15,7 +15,3 @@ body {
 .gatsby-image-wrapper {
   margin: auto;
 }
-
-.gatsby-image-wrapper [data-main-image] {
-  border-radius: var(--radius-sm);
-}

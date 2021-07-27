@@ -7,15 +7,32 @@
 }
 
 .wrapper {
-  @apply relative -my-3 rounded-xl z-10;
+  @apply relative -my-3 py-10 rounded-xl z-10;
   background-color: var(--background-color);
 }
 
 .introduction {
-  @apply text-center text-xl text-black font-medium py-14 px-8;
+  @apply text-center text-xl text-black font-medium px-8;
   line-height: 1.8;
 
   p:first-child {
     @apply mb-2;
+  }
+}
+
+section {
+  @apply py-10;
+}
+
+.heading {
+  @apply mb-10;
+
+  h2 {
+    @apply text-center text-5xl mb-2;
+    line-height: 1;
+    font-family: playball;
+  }
+  div {
+    @apply text-center font-semibold;
   }
 }

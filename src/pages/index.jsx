@@ -2,6 +2,7 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Layout } from '../components/layout';
+import Button from '../components/button';
 import ProductListing from '../components/product-listing';
 import * as s from './index.module.less';
 
@@ -34,6 +35,15 @@ export const query = graphql`
         gatsbyImageData
       }
     }
+    allDatoCmsSpecialGuest {
+      nodes {
+        name
+        id
+        thumbImage {
+          gatsbyImageData
+        }
+      }
+    }
   }
 `;
 
@@ -56,11 +66,23 @@ export default function IndexPage({ data }) {
             }}
             className={s.introduction}
           />
+          <Button to="/">Learn More</Button>
         </section>
       </div>
       <GatsbyImage image={data.datoCmsTopPage.peakImage.gatsbyImageData} />
       <div className={s.wrapper}>
-        <ProductListing products={data?.shopifyCollection?.products} />
+        <section>
+          <div className={s.heading}>
+            <h2>Special Guests</h2>
+            <div>スペシャルゲスト</div>
+          </div>
+          {data.allDatoCmsSpecialGuest.nodes.map(({ thumbImage, id }) => (
+            <GatsbyImage id={id} image={thumbImage.gatsbyImageData} />
+          ))}
+        </section>
+        <section>
+          <ProductListing products={data?.shopifyCollection?.products} />
+        </section>
       </div>
     </Layout>
   );

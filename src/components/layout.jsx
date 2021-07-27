@@ -3,6 +3,7 @@ import { SkipNavContent, SkipNavLink } from './skip-nav';
 import Header from './header';
 import Footer from './footer';
 import { Seo } from './seo';
+import '@fontsource/playball';
 
 export function Layout({ children }) {
   return (

@@ -1,0 +1,21 @@
+.container {
+  padding-left: var(--size-gutter-raw);
+  padding-right: var(--size-gutter-raw);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-3xl);
+  max-width: 76ch;
+}
+
+.wrapper {
+  @apply relative -my-3 rounded-xl z-10;
+  background-color: var(--background-color);
+}
+
+.introduction {
+  @apply text-center text-xl text-black font-medium py-14 px-8;
+  line-height: 1.8;
+
+  p:first-child {
+    @apply mb-2;
+  }
+}

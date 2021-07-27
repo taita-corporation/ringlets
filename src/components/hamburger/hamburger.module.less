@@ -1,0 +1,33 @@
+.container {
+  @apply relative flex flex-col items-center justify-evenly h-6;
+  width: 24px;
+
+  span {
+    @apply absolute m-auto bg-black;
+    width: 24px;
+    height: 1px;
+    transition: all 0.5s ease-in-out;
+    &:first-child {
+      transform: translateY(-3px);
+    }
+    &:nth-child(2) {
+      transform: translateY(3px);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[data-open="true"] {
+    span {
+      background-color: white;
+    }
+    span:first-child {
+      transform: rotate(45deg);
+    }
+    span:nth-child(2) {
+      transform: rotate(-45deg);
+    }
+  }
+}

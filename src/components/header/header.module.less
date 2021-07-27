@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  z-index: 99;
+  top: 0;
+}
+
+.header {
+  @apply flex flex-row w-full items-center justify-between p-4;
+  background-color: transparent;
+}
+
+.logo {
+  display: flex;
+  flex-grow: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-secondary);
+}
+
+.logo:hover {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.logo[aria-current="page"] {
+  color: var(--primary);
+}

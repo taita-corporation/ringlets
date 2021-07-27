@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
+import { Cross } from 'hamburger-react';
 import { StoreContext } from '../../context/store-context';
+import Hamburger from '../hamburger/hamburger';
 import Logo from '../../icons/logo';
 import CartButton from '../cart-button';
-import SearchIcon from '../../icons/search';
 import Toast from '../toast';
-import * as s from './header.module.css';
+import * as s from './header.module.less';
 
 function Header() {
-  const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext);
+  const {
+    checkout, loading, didJustAddToCart, isOpen, setIsOpen,
+  } = React.useContext(StoreContext);
 
   const items = checkout ? checkout.lineItems : [];
 
@@ -17,11 +20,9 @@ function Header() {
   return (
     <div className={s.container}>
       <header className={s.header}>
+        <Hamburger data-open={isOpen} onClick={() => { setIsOpen(!isOpen); }} />
         <Link to="/" className={s.logo}>
           <Logo />
-        </Link>
-        <Link to="/search" className={s.searchButton}>
-          <SearchIcon />
         </Link>
         <CartButton quantity={quantity} />
       </header>

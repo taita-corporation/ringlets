@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: var(--font-body);
   color: var(--text-color);
+  background-color: #fff9f0;
 }
 
 .gatsby-image-wrapper {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
-import CartIcon from '../../icons/cart';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { cartButton, badge } from './cart-button.module.css';
 
 function CartButton({ quantity }) {
@@ -10,7 +10,7 @@ function CartButton({ quantity }) {
       to="/cart"
       className={cartButton}
     >
-      <CartIcon />
+      <HiOutlineShoppingBag size={24} />
       {quantity > 0 && <div className={badge}>{quantity}</div>}
     </Link>
   );

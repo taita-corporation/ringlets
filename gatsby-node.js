@@ -2,7 +2,7 @@ const path = require('path');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const result = await graphql(`
+  const specialGuestResult = await graphql(`
       query {
         allDatoCmsSpecialGuest {
             edges {
@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
       }
     `);
-  const specialGuestsList = result.data.allDatoCmsSpecialGuest.edges;
+  const specialGuestsList = specialGuestResult.data.allDatoCmsSpecialGuest.edges;
 
   specialGuestsList.forEach(({ node }) => {
     createPage({

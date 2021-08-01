@@ -18,6 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
       }
     `);
+
   const specialGuestsList = specialGuestResult.data.allDatoCmsSpecialGuest.edges;
 
   specialGuestsList.forEach(({ node }) => {

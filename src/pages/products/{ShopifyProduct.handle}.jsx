@@ -3,33 +3,15 @@ import { graphql, Link } from 'gatsby';
 import isEqual from 'lodash.isequal';
 import { GatsbyImage, getSrc } from 'gatsby-plugin-image';
 import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
-import { Layout } from '../../../components/layout';
-import { StoreContext } from '../../../context/store-context';
-import AddToCart from '../../../components/add-to-cart';
-import { NumericInput } from '../../../components/numeric-input';
-import { formatPrice } from '../../../utils/format-price';
-import { Seo } from '../../../components/seo';
-import {
-  productBox,
-  container,
-  header,
-  productImageWrapper,
-  productImageList,
-  productImageListItem,
-  scrollForMore,
-  noImagePreview,
-  optionsWrapper,
-  priceValue,
-  selectVariant,
-  labelFont,
-  breadcrumb,
-  tagList,
-  addToCartStyle,
-  metaSection,
-  productDescription,
-} from './product-page.module.css';
+import { Layout } from '../../components/layout';
+import { StoreContext } from '../../context/store-context';
+import AddToCart from '../../components/add-to-cart';
+import { NumericInput } from '../../components/numeric-input';
+import { formatPrice } from '../../utils/format-price';
+import { Seo } from '../../components/seo';
+import * as s from './product-page.module.less';
 
-export default function Product({ data: { product, suggestions } }) {
+export default function Product({ data: { product } }) {
   const {
     options,
     variants,
@@ -107,20 +89,20 @@ export default function Product({ data: { product, suggestions } }) {
           image={getSrc(firstImage.gatsbyImageData)}
         />
       ) : undefined}
-      <div className={container}>
-        <div className={productBox}>
+      <div className={s.container}>
+        <div className={s.productBox}>
           {hasImages && (
-            <div className={productImageWrapper}>
+            <div className={s.productImageWrapper}>
               <div
                 role="group"
                 aria-label="gallery"
                 aria-describedby="instructions"
               >
-                <ul className={productImageList}>
+                <ul className={s.productImageList}>
                   {images.map((image, index) => (
                     <li
                       key={`product-image-${image.id}`}
-                      className={productImageListItem}
+                      className={s.productImageListItem}
                     >
                       <GatsbyImage
                         objectFit="contain"
@@ -137,7 +119,7 @@ export default function Product({ data: { product, suggestions } }) {
                 </ul>
               </div>
               {hasMultipleImages && (
-                <div className={scrollForMore} id="instructions">
+                <div className={s.scrollForMore} id="instructions">
                   <span aria-hidden="true">←</span>
                   {' '}
                   scroll for more
@@ -148,22 +130,22 @@ export default function Product({ data: { product, suggestions } }) {
             </div>
           )}
           {!hasImages && (
-            <span className={noImagePreview}>No Preview image</span>
+            <span className={s.noImagePreview}>No Preview image</span>
           )}
           <div>
-            <div className={breadcrumb}>
+            <div className={s.breadcrumb}>
               <Link to={product.productTypeSlug}>{product.productType}</Link>
               <ChevronIcon size={12} />
             </div>
-            <h1 className={header}>{title}</h1>
-            <p className={productDescription}>{description}</p>
-            <h2 className={priceValue}>
+            <h1 className={s.header}>{title}</h1>
+            <p className={s.productDescription}>{description}</p>
+            <h2 className={s.priceValue}>
               <span>{price}</span>
             </h2>
-            <fieldset className={optionsWrapper}>
+            <fieldset className={s.optionsWrapper}>
               {hasVariants
                 && options.map(({ id, name, values }, index) => (
-                  <div className={selectVariant} key={id}>
+                  <div className={s.selectVariant} key={id}>
                     <select
                       aria-label="Variants"
                       onChange={(event) => handleOptionChange(index, event)}
@@ -178,7 +160,7 @@ export default function Product({ data: { product, suggestions } }) {
                   </div>
                 ))}
             </fieldset>
-            <div className={addToCartStyle}>
+            <div className={s.addToCartStyle}>
               <NumericInput
                 aria-label="Quantity"
                 onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
@@ -194,18 +176,6 @@ export default function Product({ data: { product, suggestions } }) {
                 available={available}
               />
             </div>
-            <div className={metaSection}>
-              <span className={labelFont}>Type</span>
-              <span className={tagList}>
-                <Link to={product.productTypeSlug}>{product.productType}</Link>
-              </span>
-              <span className={labelFont}>Tags</span>
-              <span className={tagList}>
-                {product.tags.map((tag) => (
-                  <Link to={`/search?t=${tag}`}>{tag}</Link>
-                ))}
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -214,14 +184,11 @@ export default function Product({ data: { product, suggestions } }) {
 }
 
 export const query = graphql`
-  query($id: String!, $productType: String!) {
+  query($id: String!) {
     product: shopifyProduct(id: { eq: $id }) {
       title
       description
       productType
-      productTypeSlug: gatsbyPath(
-        filePath: "/products/{ShopifyProduct.productType}"
-      )
       tags
       priceRangeV2 {
         maxVariantPrice {
@@ -253,14 +220,6 @@ export const query = graphql`
         name
         values
         id
-      }
-    }
-    suggestions: allShopifyProduct(
-      limit: 3
-      filter: { productType: { eq: $productType }, id: { ne: $id } }
-    ) {
-      nodes {
-        ...ProductCard
       }
     }
   }

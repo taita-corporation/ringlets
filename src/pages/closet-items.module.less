@@ -2,6 +2,48 @@
   @apply relative -my-3 py-10 px-8 rounded-xl z-10;
   background-color: var(--background-color);
 }
+
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+
+    span {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.heading {
+  @apply mb-4;
+
+  h2 {
+    @apply text-center text-5xl mb-2;
+    line-height: 1;
+    font-family: playball;
+    color: #d30c0c;
+  }
+  p {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
+
 .itemList {
   width: 100%;
   display: flex;

@@ -19,6 +19,28 @@ const ClosetPage = ({ data }) => {
           className="opacity-80"
         />
         <div className={s.wrapper}>
+          <h1>タンスの肥やしから選択</h1>
+          <ul className={s.steps}>
+            <li>
+              <span>&#10102;</span>
+              <span>Search</span>
+              <p>あなたのクローゼットの中のお洋服と似ているものを探して選択しましょう</p>
+            </li>
+            <li>
+              <span>&#10103;</span>
+              <span>Select</span>
+              <p>Ringletsがコーディネートをご提案します。気になるコーディネートをチェックしましょう</p>
+            </li>
+            <li>
+              <span>&#10104;</span>
+              <span>Buy</span>
+              <p>コーディネートの使用アイテムが購入できます。タンスの肥やしの服の輝きを取り戻しましょう！</p>
+            </li>
+          </ul>
+          <div className={s.heading}>
+            <h2>Search</h2>
+            <p>あなたのクローゼットの中にもこんな服はありませんか？</p>
+          </div>
           <ul className={s.itemList}>
             {items.map(({ node }, idx) => (
               <li onClick={() => { setSelectedItem(idx); }}>

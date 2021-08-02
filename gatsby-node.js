@@ -6,11 +6,6 @@ exports.createPages = async ({ graphql, actions }) => {
       query {
         allDatoCmsSpecialGuest {
             edges {
-              node {
-                profileImage {
-                  gatsbyImageData
-                }
-                name
                 instagram
                 collection
               }
@@ -26,8 +21,6 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/special-guests/${node.instagram}`,
       component: path.resolve('./src/templates/special-guest-profile.jsx'),
       context: {
-        name: node.name,
-        profileImage: node.profileImage,
         instagram: node.instagram,
         collection: node.collection,
       },

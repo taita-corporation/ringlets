@@ -1,8 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { Layout } from '../components/layout';
 
 const SpecialGuestsPage = ({ data }) => (
-  <div>special guests</div>
+  <Layout>
+    {data.allDatoCmsSpecialGuest.edges.map(({ node }) => (
+      <div>
+        {node.name}
+      </div>
+    ))}
+  </Layout>
 );
 
 export const query = graphql`

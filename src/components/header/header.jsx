@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
-import { Cross } from 'hamburger-react';
+import { StaticImage } from 'gatsby-plugin-image';
 import { StoreContext } from '../../context/store-context';
 import Hamburger from '../hamburger/hamburger';
-import Logo from '../../icons/logo';
 import CartButton from '../cart-button';
 import Toast from '../toast';
 import * as s from './header.module.less';
@@ -22,7 +21,11 @@ function Header() {
       <header className={s.header}>
         <Hamburger data-open={isOpen} onClick={() => { setIsOpen(!isOpen); }} />
         <Link to="/" className={s.logo}>
-          <Logo />
+          <StaticImage
+            src="../../../static/ringlets_logo.png"
+            layout="constrained"
+            height={45}
+          />
         </Link>
         <CartButton quantity={quantity} />
       </header>

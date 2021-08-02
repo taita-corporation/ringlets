@@ -59,14 +59,14 @@ export default function IndexPage({ data }) {
           className={s.introduction}
         />
         <section>
-          <GatsbyImage image={data.datoCmsTopPage.closetImage.gatsbyImageData} />
+          <GatsbyImage image={data.datoCmsTopPage.closetImage.gatsbyImageData} className={s.closetImage} />
           <div
             dangerouslySetInnerHTML={{
               __html: data.datoCmsTopPage.closetIntroNode.childMarkdownRemark.html,
             }}
             className={s.introduction}
           />
-          <Button to="/">Learn More</Button>
+          <Button to="/closet-items">Learn More</Button>
         </section>
       </div>
       <GatsbyImage image={data.datoCmsTopPage.peakImage.gatsbyImageData} />

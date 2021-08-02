@@ -7,21 +7,29 @@
 }
 
 .wrapper {
-  @apply relative -my-3 py-10 rounded-xl z-10;
+  @apply relative -my-3 py-10 px-8 rounded-xl z-10;
   background-color: var(--background-color);
 }
 
 .introduction {
-  @apply text-center text-xl text-black font-medium px-8;
+  @apply text-center text-xl text-black font-medium;
   line-height: 1.8;
 
   p:first-child {
     @apply mb-2;
   }
+
+  h3 {
+    @apply font-bold text-2xl py-2;
+  }
 }
 
 section {
   @apply py-10;
+}
+
+.closetImage {
+  @apply rounded-md mb-4;
 }
 
 .heading {
@@ -31,6 +39,7 @@ section {
     @apply text-center text-5xl mb-2;
     line-height: 1;
     font-family: playball;
+    color: #d30c0c;
   }
   div {
     @apply text-center font-semibold;

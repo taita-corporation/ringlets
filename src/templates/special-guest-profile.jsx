@@ -2,16 +2,29 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Layout } from '../components/layout';
+import ProductListing from '../components/product-listing';
+import * as s from './special-guest-profile.module.less';
 
 const ProfilePage = ({ data }) => (
   <Layout>
-    <div>
-      {data.datoCmsSpecialGuest.name}
+    <div className="flex flex-col items-center my-8 px-8">
+      <GatsbyImage image={data.datoCmsSpecialGuest.profileImage.gatsbyImageData} className="rounded-full" />
+      <h2>
+        {data.datoCmsSpecialGuest.name}
+      </h2>
+
+      <div dangerouslySetInnerHTML={{
+        __html: data.datoCmsSpecialGuest.descriptionNode.childrenMarkdownRemark.html,
+      }}
+      />
     </div>
-    <GatsbyImage image={data.datoCmsSpecialGuest.profileImage.gatsbyImageData} className="rounded-full" />
-    {data.shopifyCollection.products.map(({ handle }) => (
-      <div>{handle}</div>
-    ))}
+    <div className={s.heading}>
+      <h2>
+        Coordinate
+      </h2>
+      <div>コーディネート</div>
+    </div>
+    <ProductListing products={data.shopifyCollection.products} />
   </Layout>
 );
 
@@ -21,11 +34,16 @@ export const query = graphql`
     query ($collection: String!, $instagram: String!) {
     shopifyCollection(handle: {eq: $collection }) {
         products {
-          handle
+          ...ProductCard
         }
       }
     datoCmsSpecialGuest (instagram: {eq: $instagram}) {
       name
+      descriptionNode {
+        childrenMarkdownRemark {
+            html
+          }
+      }
       profileImage {
         gatsbyImageData (
           layout: CONSTRAINED,

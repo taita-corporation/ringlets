@@ -27,11 +27,12 @@ function Header() {
             data-open={isOpen}
             onClick={() => { setIsOpen(!isOpen); }}
           />
-          <Link to="/" className={s.logo}>
+          <Link to="/">
             <StaticImage
               src="../../../static/ringlets_logo.png"
               layout="constrained"
               height={45}
+              placeholder="none"
             />
           </Link>
           <CartButton quantity={quantity} />

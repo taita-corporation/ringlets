@@ -9,8 +9,8 @@ const Menu = ({ isOpen }) => (
   <AnimatePresence>
     {isOpen && (
     <RemoveScroll forwardProps>
-      <motion
-        transition={{ duration: 0.5 }}
+      <motion.div
+        transition={{ duration: 0.3 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -44,7 +44,7 @@ const Menu = ({ isOpen }) => (
             </a>
           </div>
         </div>
-      </motion>
+      </motion.div>
     </RemoveScroll>
     )}
   </AnimatePresence>

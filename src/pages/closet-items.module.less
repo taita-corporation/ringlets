@@ -45,10 +45,30 @@ h1 {
 }
 
 .itemList {
+  position: absolute;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
-  height: 200px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 20px;
+  scrollbar-width: none;
+
+  li {
+    margin-right: 1rem;
+  }
+}
+
+.closetItemImage {
+  width: 100px;
+  @apply rounded-md shadow-sm;
+}
+
+.selected {
+  border: 2px solid green;
 }

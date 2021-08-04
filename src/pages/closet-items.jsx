@@ -6,8 +6,8 @@ import { Layout } from '../components/layout';
 import * as s from './closet-items.module.less';
 
 const ClosetPage = ({ data }) => {
-  const [selectedItem, setSelectedItem] = useState(1);
-  console.log(typeof (data.allDatoCmsUnusedClothing.edges[0].node.products[0].product));
+  const [selectedItem, setSelectedItem] = useState(0);
+  console.log(typeof (data.allDatoCmsUnusedClothing.edges[0].node.products[0]?.product));
 
   const items = data.allDatoCmsUnusedClothing.edges;
 
@@ -41,14 +41,19 @@ const ClosetPage = ({ data }) => {
             <h2>Search</h2>
             <p>あなたのクローゼットの中にもこんな服はありませんか？</p>
           </div>
-          <ul className={s.itemList}>
-            {items.map(({ node }, idx) => (
-              <li onClick={() => { setSelectedItem(idx); }}>
-                <GatsbyImage image={node.image.gatsbyImageData} />
-                {node.title}
-              </li>
-            ))}
-          </ul>
+          <div className="relative h-60 -mx-8">
+            <ul className={s.itemList}>
+              {items.map(({ node }, idx) => (
+                <li onClick={() => { setSelectedItem(idx); }}>
+                  <GatsbyImage image={node.image.gatsbyImageData} className={cn(s.closetItemImage, { [s.selected]: selectedItem === idx })} />
+                  <span>
+                    {node.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+          </div>
           <div>
             {items.map(({ node }, idx) => (
               <>
@@ -81,7 +86,7 @@ export const query = graphql`
             products {
               product
                 image {
-                    gatsbyImageData (layout: CONSTRAINED)
+                    gatsbyImageData (layout: CONSTRAINED, aspectRatio: 1)
                 }
             }
             title

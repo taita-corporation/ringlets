@@ -6,11 +6,12 @@ exports.createPages = async ({ graphql, actions }) => {
       query {
         allDatoCmsSpecialGuest {
             edges {
-                instagram
-                collection
+                node {
+                  instagram
+                  collection
+                }
               }
             }
-          }
       }
     `);
 

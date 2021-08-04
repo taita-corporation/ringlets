@@ -96,7 +96,7 @@ export const query = graphql`
               id
               product
               image {
-                  gatsbyImageData (layout: CONSTRAINED, aspectRatio: 1)
+                  gatsbyImageData (layout: CONSTRAINED, aspectRatio: 0.8)
               }
             }
             title

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import cn from 'classnames';
 import { Layout } from '../components/layout';
@@ -44,8 +44,12 @@ const ClosetPage = ({ data }) => {
           <div className="relative h-60 -mx-8">
             <ul className={s.itemList}>
               {items.map(({ node }, idx) => (
+                // eslint-disable-next-line
                 <li onClick={() => { setSelectedItem(idx); }}>
-                  <GatsbyImage image={node.image.gatsbyImageData} className={cn(s.closetItemImage, { [s.selected]: selectedItem === idx })} />
+                  <GatsbyImage
+                    image={node.image.gatsbyImageData}
+                    className={cn(s.closetItemImage, { [s.selected]: selectedItem === idx })}
+                  />
                   <span>
                     {node.title}
                   </span>
@@ -58,9 +62,14 @@ const ClosetPage = ({ data }) => {
             {items.map(({ node }, idx) => (
               <>
                 <div className={cn({ hidden: !(idx === selectedItem) })}>
-                  {node.products.map(({ image }) => (
+                  {node.products.map(({ id, product, image }) => (
                     <>
-                      <GatsbyImage image={image.gatsbyImageData} />
+                      <div key={id} className="grid grid-cols-2">
+                        <Link to={`/products/${product}`}>
+                          <GatsbyImage image={image.gatsbyImageData} className="rounded-md" />
+                          <div className="font-semibold text-xl" />
+                        </Link>
+                      </div>
                     </>
                   ))}
                 </div>
@@ -84,10 +93,11 @@ export const query = graphql`
         edges {
           node {
             products {
+              id
               product
-                image {
-                    gatsbyImageData (layout: CONSTRAINED, aspectRatio: 1)
-                }
+              image {
+                  gatsbyImageData (layout: CONSTRAINED, aspectRatio: 1)
+              }
             }
             title
             image {

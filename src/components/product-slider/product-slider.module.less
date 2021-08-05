@@ -1,0 +1,37 @@
+.root {
+  @apply relative w-full h-full select-none;
+  overflow: hidden;
+}
+
+.slider {
+  @apply relative h-full transition-opacity duration-150;
+  opacity: 0;
+  /* display: none; */
+}
+
+.slider.show {
+  opacity: 1;
+}
+
+.album {
+  @apply w-full h-full box-content;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.album::-webkit-scrollbar {
+  display: none;
+}
+
+.thumb {
+  @apply overflow-hidden inline-block align-middle
+    cursor-pointer h-full;
+  width: calc(100% / 3);
+  transition: all 75ms linear;
+}
+
+.thumb.selected {
+  @apply bg-white opacity-70;
+}

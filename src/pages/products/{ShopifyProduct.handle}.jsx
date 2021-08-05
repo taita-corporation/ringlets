@@ -2,14 +2,13 @@ import * as React from 'react';
 import { graphql, Link } from 'gatsby';
 import isEqual from 'lodash.isequal';
 import { GatsbyImage, getSrc } from 'gatsby-plugin-image';
-import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
 import { Layout } from '../../components/layout';
 import { StoreContext } from '../../context/store-context';
 import AddToCart from '../../components/add-to-cart';
-import { NumericInput } from '../../components/numeric-input';
 import { formatPrice } from '../../utils/format-price';
 import { Seo } from '../../components/seo';
 import * as s from './product-page.module.less';
+import ProductSlider from '../../components/product-slider/product-slider';
 
 export default function Product({ data: { product } }) {
   const {
@@ -78,7 +77,6 @@ export default function Product({ data: { product } }) {
 
   const hasVariants = variants.length > 1;
   const hasImages = images.length > 0;
-  const hasMultipleImages = true || images.length > 1;
 
   return (
     <Layout>
@@ -98,78 +96,58 @@ export default function Product({ data: { product } }) {
                 aria-label="gallery"
                 aria-describedby="instructions"
               >
-                <ul className={s.productImageList}>
-                  {images.map((image, index) => (
-                    <li
-                      key={`product-image-${image.id}`}
-                      className={s.productImageListItem}
-                    >
-                      <GatsbyImage
-                        objectFit="contain"
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        alt={
+                <ul>
+                  <ProductSlider>
+                    {images.map((image, index) => (
+                      <li
+                        key={`product-image-${image.id}`}
+                        className={s.productImageListItem}
+                      >
+                        <GatsbyImage
+                          objectFit="contain"
+                          loading={index === 0 ? 'eager' : 'lazy'}
+                          alt={
                           image.altText
                             ? image.altText
                             : `Product Image of ${title} #${index + 1}`
                         }
-                        image={image.gatsbyImageData}
-                      />
-                    </li>
-                  ))}
+                          image={image.gatsbyImageData}
+                        />
+                      </li>
+                    ))}
+                  </ProductSlider>
                 </ul>
               </div>
-              {hasMultipleImages && (
-                <div className={s.scrollForMore} id="instructions">
-                  <span aria-hidden="true">←</span>
-                  {' '}
-                  scroll for more
-                  {' '}
-                  <span aria-hidden="true">→</span>
-                </div>
-              )}
             </div>
           )}
           {!hasImages && (
             <span className={s.noImagePreview}>No Preview image</span>
           )}
           <div>
-            <div className={s.breadcrumb}>
-              <Link to={product.productTypeSlug}>{product.productType}</Link>
-              <ChevronIcon size={12} />
-            </div>
             <h1 className={s.header}>{title}</h1>
             <p className={s.productDescription}>{description}</p>
             <h2 className={s.priceValue}>
               <span>{price}</span>
             </h2>
-            <fieldset className={s.optionsWrapper}>
-              {hasVariants
-                && options.map(({ id, name, values }, index) => (
-                  <div className={s.selectVariant} key={id}>
-                    <select
-                      aria-label="Variants"
-                      onChange={(event) => handleOptionChange(index, event)}
-                    >
-                      <option value="">{`Select ${name}`}</option>
-                      {values.map((value) => (
-                        <option value={value} key={`${name}-${value}`}>
-                          {value}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-            </fieldset>
-            <div className={s.addToCartStyle}>
-              <NumericInput
-                aria-label="Quantity"
-                onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
-                onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-                onChange={(event) => setQuantity(event.currentTarget.value)}
+            <div className={s.quantityFieldWrapper}>
+              <label className="mr-2">
+                数量
+              </label>
+              <select
+                aria-label="数量"
                 value={quantity}
-                min="1"
-                max="20"
-              />
+                onChange={(event) => setQuantity(event.currentTarget.value)}
+                className={s.quantityField}
+              >
+                <option>
+                  1
+                </option>
+                <option>
+                  2
+                </option>
+              </select>
+            </div>
+            <div className={s.addToCartStyle}>
               <AddToCart
                 variantId={productVariant.storefrontId}
                 quantity={quantity}

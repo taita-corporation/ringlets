@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { graphql, Link } from 'gatsby';
-import isEqual from 'lodash.isequal';
+import { graphql } from 'gatsby';
 import { GatsbyImage, getSrc } from 'gatsby-plugin-image';
 import { Layout } from '../../components/layout';
 import { StoreContext } from '../../context/store-context';
@@ -12,8 +11,6 @@ import ProductSlider from '../../components/product-slider/product-slider';
 
 export default function Product({ data: { product } }) {
   const {
-    options,
-    variants,
     variants: [initialVariant],
     priceRangeV2,
     title,
@@ -23,48 +20,30 @@ export default function Product({ data: { product } }) {
   } = product;
   const { client } = React.useContext(StoreContext);
 
-  const [variant, setVariant] = React.useState({ ...initialVariant });
   const [quantity, setQuantity] = React.useState(1);
 
+  const variant = initialVariant;
   const productVariant = client.product.helpers.variantForOptions(product, variant) || variant;
 
   const [available, setAvailable] = React.useState(
     productVariant.availableForSale,
   );
 
+  // check if selected variant is available
   const checkAvailablity = React.useCallback(
-    (productId) => {
-      client.product.fetch(productId).then((fetchedProduct) => {
-        const result = fetchedProduct?.variants.filter(
-          (variant) => variant.id === productVariant.storefrontId,
-        ) ?? [];
+    async (productId) => {
+      const fetchedProduct = await client.product.fetch(productId);
+      const result = fetchedProduct?.variants.filter(
+        (v) => v.id === productVariant.storefrontId,
+      ) ?? [];
+      console.log('result:', result);
 
-        if (result.length > 0) {
-          setAvailable(result[0].available);
-        }
-      });
+      if (result.length > 0) {
+        setAvailable(result[0].available);
+      }
     },
     [productVariant.storefrontId, client.product],
   );
-
-  const handleOptionChange = (index, event) => {
-    const { value } = event.target;
-
-    if (value === '') {
-      return;
-    }
-
-    const currentOptions = [...variant.selectedOptions];
-
-    currentOptions[index] = {
-      ...currentOptions[index],
-      value,
-    };
-
-    const selectedVariant = variants.find((variant) => isEqual(currentOptions, variant.selectedOptions));
-
-    setVariant({ ...selectedVariant });
-  };
 
   React.useEffect(() => {
     checkAvailablity(product.storefrontId);
@@ -75,8 +54,9 @@ export default function Product({ data: { product } }) {
     variant.price,
   );
 
-  const hasVariants = variants.length > 1;
   const hasImages = images.length > 0;
+
+  console.log('images:', images);
 
   return (
     <Layout>
@@ -120,9 +100,12 @@ export default function Product({ data: { product } }) {
               </div>
             </div>
           )}
+
+          {/* if product has no images */}
           {!hasImages && (
             <span className={s.noImagePreview}>No Preview image</span>
           )}
+
           <div>
             <h1 className={s.header}>{title}</h1>
             <p className={s.productDescription}>{description}</p>
@@ -130,6 +113,7 @@ export default function Product({ data: { product } }) {
               <span>{price}</span>
             </h2>
             <div className={s.quantityFieldWrapper}>
+              {/* eslint-disable-next-line */}
               <label className="mr-2">
                 数量
               </label>
@@ -139,12 +123,10 @@ export default function Product({ data: { product } }) {
                 onChange={(event) => setQuantity(event.currentTarget.value)}
                 className={s.quantityField}
               >
-                <option>
-                  1
-                </option>
-                <option>
-                  2
-                </option>
+                {available
+                  && Array.from({ length: variant.inventoryQuantity }, (v, i) => i + 1).map((i) => (
+                    <option>{i}</option>
+                  ))}
               </select>
             </div>
             <div className={s.addToCartStyle}>
@@ -187,6 +169,7 @@ export const query = graphql`
       variants {
         availableForSale
         storefrontId
+        inventoryQuantity
         title
         price
         selectedOptions {

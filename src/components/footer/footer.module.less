@@ -2,11 +2,6 @@
   @apply rounded-t-xl;
   background-color: var(--background-black);
   padding: var(--space-2xl) var(--space-xl);
-  gap: var(--space-xl);
-  display: grid;
-  grid-template-columns: 1fr;
-  text-align: center;
-  color: var(--text-color-secondary);
   margin-top: var(--space-3xl);
 }
 
@@ -15,30 +10,36 @@
   font-size: var(--text-xs);
 }
 
-.footerNavList {
+.wrapper {
+  width: 100%;
+  background-color: var(--background-black);
+  overflow: auto;
+  padding: 1rem 0;
+}
+
+.nav {
   display: flex;
   flex-direction: column;
-  font-size: var(--text-md);
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+
+  li {
+    margin-bottom: 1rem;
+  }
 }
 
-.footerNavListItem {
-  align-items: center;
+.navSmall {
   display: flex;
   flex-direction: column;
-  flex: 0 0 100%;
-  white-space: nowrap;
+  color: #fff;
+  font-size: 1.2rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
 }
 
-.links ul {
-  flex-direction: column;
-  font-size: var(--text-md);
-}
-
-.links li {
-  flex-direction: column;
-  align-items: center;
-}
-
-.links a {
-  padding: var(--space-md);
+.icon {
+  color: #fff;
 }

@@ -9,6 +9,7 @@ function AddToCart({
 
   function addToCart(e) {
     e.preventDefault();
+    console.log('variantId', variantId);
     addVariantToCart(variantId, quantity);
   }
 

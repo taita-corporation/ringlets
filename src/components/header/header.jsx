@@ -40,10 +40,10 @@ function Header() {
         <Menu isOpen={isOpen} />
         <Toast show={loading || didJustAddToCart}>
           {!didJustAddToCart ? (
-            'Updating…'
+            '更新中'
           ) : (
             <>
-              Added to cart
+              バッグに追加されました
               {' '}
               <svg
                 width="14"

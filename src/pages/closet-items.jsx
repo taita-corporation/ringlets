@@ -7,7 +7,6 @@ import * as s from './closet-items.module.less';
 
 const ClosetPage = ({ data }) => {
   const [selectedItem, setSelectedItem] = useState(0);
-  console.log(typeof (data.allDatoCmsUnusedClothing.edges[0].node.products[0]?.product));
 
   const items = data.allDatoCmsUnusedClothing.edges;
 
@@ -41,11 +40,11 @@ const ClosetPage = ({ data }) => {
             <h2>Search</h2>
             <p>あなたのクローゼットの中にもこんな服はありませんか？</p>
           </div>
-          <div className="relative h-60 -mx-8">
+          <div className="relative -mx-8 h-60">
             <ul className={s.itemList}>
               {items.map(({ node }, idx) => (
                 // eslint-disable-next-line
-                <li onClick={() => { setSelectedItem(idx); }}>
+                <li onClick={() => { setSelectedItem(idx); }} className="cursor-pointer">
                   <GatsbyImage
                     image={node.image.gatsbyImageData}
                     className={cn(s.closetItemImage, { [s.selected]: selectedItem === idx })}
@@ -61,13 +60,16 @@ const ClosetPage = ({ data }) => {
           <div>
             {items.map(({ node }, idx) => (
               <>
-                <div className={cn({ hidden: !(idx === selectedItem) })}>
+                <div className={cn({ hidden: !(idx === selectedItem) }, 'my-8')}>
+                  <h3>
+                    {node.title}
+                    を使ったコーディネート
+                  </h3>
                   {node.products.map(({ id, product, image }) => (
                     <>
                       <div key={id} className="grid grid-cols-2">
                         <Link to={`/products/${product}`}>
                           <GatsbyImage image={image.gatsbyImageData} className="rounded-md" />
-                          <div className="font-semibold text-xl" />
                         </Link>
                       </div>
                     </>

@@ -11,7 +11,7 @@ function CartButton({ quantity }) {
       className={cartButton}
     >
       <HiOutlineShoppingBag size={24} />
-      {quantity > 0 && <div className={badge}>{quantity}</div>}
+      {quantity > 0 && <div className={badge} />}
     </Link>
   );
 }

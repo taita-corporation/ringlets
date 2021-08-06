@@ -51,7 +51,7 @@ export const query = graphql`
 export default function IndexPage({ data }) {
   return (
     <Layout>
-      <GatsbyImage image={data.datoCmsTopPage.heroImage.gatsbyImageData} />
+      <GatsbyImage image={data.datoCmsTopPage.heroImage.gatsbyImageData} className="w-full" />
       <div className={s.wrapper}>
         <div
           /* eslint-disable-next-line react/no-danger */
@@ -88,7 +88,7 @@ export default function IndexPage({ data }) {
             <div key={id} className="grid grid-cols-2">
               <Link to={`/special-guests/${instagram}`}>
                 <GatsbyImage image={thumbImage.gatsbyImageData} className="rounded-md" />
-                <div className="font-semibold text-xl">{name}</div>
+                <div className="text-xl font-semibold">{name}</div>
               </Link>
             </div>
           ))}

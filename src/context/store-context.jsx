@@ -87,7 +87,6 @@ export const StoreProvider = ({ children }) => {
       .addLineItems(checkoutID, lineItemsToUpdate)
       .then((res) => {
         setCheckout(res);
-        console.log(res);
         setLoading(false);
         setDidJustAddToCart(true);
         setTimeout(() => setDidJustAddToCart(false), 3000);

@@ -21,7 +21,7 @@ function AddToCart({
       disabled={!available || loading}
       {...props}
     >
-      {available ? 'Add to Cart' : 'Out of Stock'}
+      {available ? 'カートに入れる' : 'Sold Out'}
     </button>
   );
 }

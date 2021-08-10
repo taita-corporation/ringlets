@@ -4,22 +4,7 @@ import { Layout } from '../components/layout';
 import { StoreContext } from '../context/store-context';
 import LineItem from '../components/line-item';
 import { formatPrice } from '../utils/format-price';
-import {
-  table,
-  wrap,
-  totals,
-  grandTotal,
-  summary,
-  checkoutButton,
-  collapseColumn,
-  labelColumn,
-  imageHeader,
-  productHeader,
-  emptyStateContainer,
-  emptyStateHeading,
-  emptyStateLink,
-  title,
-} from './cart.module.css';
+import * as s from './cart.module.less';
 
 export default function CartPage() {
   const { checkout, loading } = React.useContext(StoreContext);
@@ -31,87 +16,49 @@ export default function CartPage() {
 
   return (
     <Layout>
-      <div className={wrap}>
+      <div className={s.wrap}>
         {emptyCart ? (
-          <div className={emptyStateContainer}>
-            <h1 className={emptyStateHeading}>Your cart is empty</h1>
+          <div className={s.emptyStateContainer}>
+            <h1 className={s.emptyStateHeading}>バッグは空です</h1>
             <p>
               Looks like you haven’t found anything yet. We understand that
               sometimes it’s hard to chose — maybe this helps:
             </p>
-            <Link to="/search?s=BEST_SELLING" className={emptyStateLink}>
+            <Link to="/search?s=BEST_SELLING" className={s.emptyStateLink}>
               View trending products
             </Link>
           </div>
         ) : (
           <>
-            <h1 className={title}>Your cart</h1>
-            <table className={table}>
-              <thead>
+            <h1 className={s.title}>バッグ</h1>
+            {checkout.lineItems.map((item) => (
+              <LineItem item={item} key={item.id} />
+            ))}
+            <hr />
+            <table className={s.table}>
+              <tbody className={s.tbody}>
                 <tr>
-                  <th className={imageHeader}>Image</th>
-                  <th className={productHeader}>Product</th>
-                  <th className={collapseColumn}>Price</th>
-                  <th>Qty.</th>
-                  <th className={[totals, collapseColumn].join(' ')}>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {checkout.lineItems.map((item) => (
-                  <LineItem item={item} key={item.id} />
-                ))}
-
-                <tr className={summary}>
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={labelColumn}>Subtotal</td>
-                  <td className={totals}>
+                  <td className={s.labelColumn}>合計：</td>
+                  <td className={s.totals}>
                     {formatPrice(
                       checkout.subtotalPriceV2.currencyCode,
                       checkout.subtotalPriceV2.amount,
                     )}
                   </td>
                 </tr>
-                <tr className={summary}>
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={labelColumn}>Taxes</td>
-                  <td className={totals}>
-                    {formatPrice(
-                      checkout.totalTaxV2.currencyCode,
-                      checkout.totalTaxV2.amount,
-                    )}
-                  </td>
-                </tr>
-                <tr className={summary}>
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={labelColumn}>Shipping</td>
-                  <td className={totals}>Calculated at checkout</td>
-                </tr>
-                <tr className={grandTotal}>
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={collapseColumn} />
-                  <td className={labelColumn}>Total Price</td>
-                  <td className={totals}>
-                    {formatPrice(
-                      checkout.totalPriceV2.currencyCode,
-                      checkout.totalPriceV2.amount,
-                    )}
-                  </td>
+                <tr>
+                  <td className={s.labelColumn}>送料：</td>
+                  <td>配送先によって異なります</td>
                 </tr>
               </tbody>
             </table>
             <button
               onClick={handleCheckout}
               disabled={loading}
-              className={checkoutButton}
+              className={s.checkoutButton}
+              type="submit"
             >
-              Checkout
+              お支払い手続きに進む
             </button>
           </>
         )}

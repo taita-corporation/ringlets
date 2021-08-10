@@ -14,4 +14,5 @@ body {
 
 .gatsby-image-wrapper {
   margin: auto;
+  z-index: 1;
 }

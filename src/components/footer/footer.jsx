@@ -27,7 +27,7 @@ function Footer() {
               <Link to="/special-guests">Legal Terms</Link>
             </li>
             <li>
-              <Link to="/special-guests">お問い合わせ</Link>
+              <div>↓お問い合わせはインスタDMまで</div>
             </li>
           </ul>
           <div className="mt-4">

@@ -30,7 +30,7 @@ export default function CartPage() {
           </div>
         ) : (
           <>
-            <h1 className={s.title}>バッグ</h1>
+            <h1 className={s.title}>ショッピングバッグ</h1>
             {checkout.lineItems.map((item) => (
               <LineItem item={item} key={item.id} />
             ))}

@@ -8,9 +8,9 @@ import * as s from './line-item.module.less';
 
 function LineItem({ item }) {
   const {
-    removeLineItem,
     checkout,
     updateLineItem,
+    removeLineItem,
     loading,
   } = React.useContext(StoreContext);
   const [quantity, setQuantity] = React.useState(item.quantity);
@@ -28,6 +28,7 @@ function LineItem({ item }) {
     removeLineItem(checkout.id, item.id);
   };
 
+  // 0.3秒間ユーザーが数を変更しないことを待ってから処理を実行する
   const uli = debounce(
     (value) => updateLineItem(checkout.id, item.id, value),
     300,
@@ -92,6 +93,9 @@ function LineItem({ item }) {
               >
                 <option>
                   1
+                </option>
+                <option>
+                  2
                 </option>
               </select>
             </div>

@@ -11,7 +11,11 @@ export function Layout({ children }) {
       <Seo />
       <SkipNavLink />
       <Header />
-      <SkipNavContent>{children}</SkipNavContent>
+      <SkipNavContent>
+        <div className="left-0 right-0 max-w-3xl mx-auto">
+          {children}
+        </div>
+      </SkipNavContent>
       <Footer />
     </div>
   );

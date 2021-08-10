@@ -35,10 +35,10 @@ const Menu = ({ isOpen }) => (
               <Link to="/special-guests">Legal Terms</Link>
             </li>
             <li>
-              <Link to="/special-guests">お問い合わせ</Link>
+              <Link to="/special-guests">↓お問い合わせはインスタDMまで</Link>
             </li>
           </ul>
-          <div className="mt-8">
+          <div className="left-0 right-0 max-w-3xl mx-auto mt-8">
             <a href="https://instagram.com/ringlets0" className="inline-block">
               <FaInstagram size={24} className={s.icon} />
             </a>

@@ -7,15 +7,21 @@ import * as s from './special-guest-profile.module.less';
 
 const ProfilePage = ({ data }) => (
   <Layout>
-    <div className="flex flex-col items-center my-8 px-8">
-      <GatsbyImage image={data.datoCmsSpecialGuest.profileImage.gatsbyImageData} className="rounded-full" />
+    <div className="flex flex-col items-center px-8 my-8">
+      <GatsbyImage
+        image={data.datoCmsSpecialGuest.profileImage.gatsbyImageData}
+        className="rounded-full"
+      />
       <h2>
         {data.datoCmsSpecialGuest.name}
       </h2>
 
-      <div dangerouslySetInnerHTML={{
-        __html: data.datoCmsSpecialGuest.descriptionNode.childrenMarkdownRemark.html,
-      }}
+      <div
+        className={s.desc}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: data.datoCmsSpecialGuest.descriptionNode.childrenMarkdownRemark.html,
+        }}
       />
     </div>
     <div className={s.heading}>
